@@ -15,7 +15,6 @@ I have chosen Kaggle DS-ML Survey dataset. I will explore the following question
 1. Explore how levels of education and majors vary in across countries, esp US and India
 2. What is the most common education level and how it relates to years of experience?
 3. What are the most common job responsibilites for each job role in India?
-4. How does salary vary with the roles and responsibilites?
 
 ---
 ## File Description <a name="desc"></a>
