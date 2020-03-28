@@ -6,7 +6,8 @@
 5. [Licensing, Authors, and Acknowledgements](#licensing)
 
 ##Installation <a name="installation"></a>
-There is no need for any additional installation beyond the Anaconda-3.x distribution for Python
+There is no need for any additional installation beyond the Anaconda-3.x distribution for Python.
+The data for Kaggle survey can be downloaded from [here](https://www.kaggle.com/kaggle/kaggle-survey-2018).
 
 ---
 ## Project Motivation <a name="motivation"></a>
