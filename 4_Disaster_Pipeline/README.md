@@ -27,6 +27,11 @@ pip install -r requirements.txt
 
 3. Go to http://127.0.0.1:3001/
 
+Repository contains 2 trained models:
+- *classifier* - Trained by lemmatizing words with POS information. This takes too long to train.
+- *classifier2* - Trained by lemmatizing without POS information.
+Currently the POS tag lemmatization code is commented out and model dumps classifer2 on training. But predicitons are made on classifier final model.
+
 ## License
 
 This project is licensed under the MIT License.
