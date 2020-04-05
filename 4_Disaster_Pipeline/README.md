@@ -1,5 +1,19 @@
 # Disaster Response Pipeline Project
 
+Predict response category for messages related to disasters using Multi-Output Classifier with Web Interface using Flask
+
+## Getting Started
+
+Clone the repository and install dependencies
+
+### Prerequisites
+
+Use the standard anaconda base environment 
+```
+pip install -r requirements.txt
+```
+- Plotly - ```conda install -c plotly plotly```
+
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
@@ -11,4 +25,8 @@
 2. Run the following command in the app's directory to run your web app.
     `python run.py`
 
-3. Go to http://0.0.0.0:3001/
+3. Go to http://127.0.0.1:3001/
+
+## License
+
+This project is licensed under the MIT License.
