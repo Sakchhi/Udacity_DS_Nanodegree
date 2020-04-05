@@ -1,24 +1,57 @@
 import sys
+import pandas as pd
+import numpy as np
+import pickle
+from sqlalchemy import create_engine
+from nltk.tokenize import RegexpTokenizer
+from sklearn.pipeline import Pipeline
+from sklearn.multioutput import MultiOutputClassifier
+from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
+from sklearn.naive_bayes import MultinomialNB
+from nltk.corpus import stopwords
+from sklearn.model_selection import train_test_split, GridSearchCV
+from sklearn.metrics import classification_report
 
 
 def load_data(database_filepath):
-    pass
+    engine = create_engine('sqlite:///'+database_filepath)
+    df = pd.read_sql_table('disaster_response_etl', engine)
+    X = df.message
+    Y = df.iloc[:, 4:]
+    categories = Y.columns.tolist()
+    return X, Y, categories
 
 
-def tokenize(text):
-    pass
+def custom_tokenize(text):
+    tokenizer = RegexpTokenizer(r'\w+')
+    return tokenizer.tokenize(text)
 
 
 def build_model():
-    pass
+    pipeline = Pipeline([
+        ('vec', CountVectorizer(strip_accents='unicode', tokenizer=custom_tokenize,
+                                max_features=5000, stop_words=stopwords.words('english'))),
+        ('tfidf', TfidfTransformer()),
+        ('clf', MultiOutputClassifier(MultinomialNB()))
+    ])
+    parameters = {
+        'vec__max_features': [2000, 5000, 7000],
+        'vec__max_df': [0.8, 0.9],
+        'tfidf__smooth_idf': [True, False]
+    }
+
+    cv = GridSearchCV(pipeline, param_grid=parameters)
+    return cv
 
 
 def evaluate_model(model, X_test, Y_test, category_names):
-    pass
+    Y_pred = model.predict(X_test)
+    Y_pred = pd.DataFrame(Y_pred, columns=Y_test.columns)
+    print(classification_report(np.hstack(Y_test.values),np.hstack(Y_pred.values)))
 
 
 def save_model(model, model_filepath):
-    pass
+    pickle.dump(model, open(model_filepath, 'wb'))
 
 
 def main():
