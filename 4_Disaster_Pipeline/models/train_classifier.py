@@ -29,7 +29,7 @@ def custom_tokenize(text):
 
 def build_model():
     pipeline = Pipeline([
-        ('vec', CountVectorizer(strip_accents='unicode', tokenizer=custom_tokenize,
+        ('vec', CountVectorizer(strip_accents='unicode', tokenizer=RegexpTokenizer(r'\w+').tokenize,
                                 max_features=5000, stop_words=stopwords.words('english'))),
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(MultinomialNB()))
